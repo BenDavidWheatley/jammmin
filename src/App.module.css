@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'lato-thin';
+    src: url('../public/fonts/Lato/Lato-Thin.ttf');
+}
+@font-face {
+    font-family: 'lato-bold';
+    src: url('../public/fonts/Lato/Lato-Bold.ttf')
+}
+
+@font-face{
+    font-family: 'robot';
+    src: url('../public/fonts/Roboto/Roboto-Thin.ttf');
+}
+
+* {
+    color: #F8F8F8;
+    font-family: 'robot';
+}
+
+/********* HEADING AND SEARCH BAR STYLE *********/
+
+.headingAndSearch {
+    width: 100%;
+    max-width: 1180px;
+    margin: auto;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.headingAndSearch h1 {
+    font-family: 'lato-thin';
+    font-size: 64px;
+}
+.headingAndSearch h1 span {
+    font-family: 'lato-bold';
+}
+.headingAndSearch p{
+    margin-bottom: 50px;
+    font-size: 21px;
+}
+
+/********* RESULTS AND TRACK LIST CONTAINERS *********/
+
+.outerContainer {
+    width: 100%;
+    max-width: 1180px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.trackListContainers {
+  
+    width: 48%;
+}
+
+

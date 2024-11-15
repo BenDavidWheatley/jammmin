@@ -1,0 +1,15 @@
+.searchContainer {
+    display: flex;
+}
+.search {
+    color: black;
+    text-align: center;
+    height: 50px;
+    width: 300px;
+    font-size: 21px;
+    border-radius: 25px;
+    border: none;
+}
+.search:focus{
+   outline-color: black;
+}
