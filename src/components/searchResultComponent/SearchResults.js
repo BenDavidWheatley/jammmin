@@ -5,7 +5,7 @@ import TrackList from '../trackListComponent/Track-List';
 function SearchResults (props) {
     
     return (
-        <TrackList tracks={props.searchResults} filtered={props.filtered}/>     
+        <TrackList tracks={props.searchResults} filtered={props.filtered} addToPlayList={props.addToPlayList}/>     
     )
 }
 

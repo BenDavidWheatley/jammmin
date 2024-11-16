@@ -5,7 +5,7 @@ import Styles from './track.module.css'
 function Track (props) {
 
     return (
-        <div className={Styles.trackContainer}>
+        <div className={Styles.trackContainer} >
             <img className={Styles.albumCover}src={props.img}/>
     
             <section className={Styles.info}>
@@ -13,7 +13,11 @@ function Track (props) {
                 <p className={Styles.artist}>Artist: {props.artist}</p>
                 <p className={Styles.album}>Album: {props.album}</p>
             </section>
-            <button className={Styles.addButton}>Add</button>
+            <button 
+                className={Styles.addButton} 
+                onClick={props.addToPlayList}
+            >{props.buttonText === 'remove'? 'Remove' : 'Add'}
+            </button>
             
         </div>
 

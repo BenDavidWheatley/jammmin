@@ -15,6 +15,7 @@ const TrackList = (props) => {
                         name={track.name}
                         artist={track.artist}
                         album={track.album}
+                        addToPlayList={props.addToPlayList}
                       />
             
           </li>

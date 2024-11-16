@@ -57,22 +57,31 @@ function App () {
   }
   };
 
+  /********** ADD TRACK TO PLAYLIST  ***********/
+  const [playlistTracks, setPlaylistTracks] = useState(null);
+  
+  const addToPlaylist = (event) => {
+
+    console.log('Track was added');
+    setPlaylistTracks(event.target.parentNode);
+
+  }
   /********** Returned JSX **********/
   return (
     <div>
       <div className={Styles.headingAndSearch}>
      
-        <h1>Ja<span>mmm</span>in</h1>
+        <h1>Ja<span className={Styles.mmm}>mmm</span>in</h1>
         <p>Explore. Play. Repeat</p>
         <SearchBar userSearch={()=>userSearch} />
       </div>
       
       <div className={Styles.outerContainer}>
         <section className={Styles.trackListContainers}>
-          <SearchResults searchResults={tracks} filtered={filteredTracks}/>
+          <SearchResults searchResults={tracks} filtered={filteredTracks} addToPlayList={addToPlaylist}/>
         </section>
         <section  className={Styles.trackListContainers}>
-          <Playlist />
+          <Playlist addedTracks={playlistTracks} />
         </section>
       </div>     
     </div>

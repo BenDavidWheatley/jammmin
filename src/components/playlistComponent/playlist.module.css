@@ -1,3 +1,30 @@
-.test {
-    color: red;
+.playlistContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #0005;
+    padding: 20px;
+    border-radius: 5px;
+
+}
+.playlistTitle {
+    height: 60px;
+    border: none;
+    border-radius: 25px;
+    color: black;
+    font-size: 21px;
+    text-align: center;
+}
+.playlistTitle:focus {
+    outline-color: #3A2F3D;
+}
+.playList{
+    min-height: 300px;
+    height: auto;
+}
+.addPlaylistButton {
+    height: 60px;
+    border-radius: 25px;
+    border: none;
+    font-size: 21px;
+    background-color: #1C1C1C;
 }
