@@ -1,15 +1,15 @@
 @font-face {
     font-family: 'lato-thin';
-    src: url('../public/fonts/Lato/Lato-Thin.ttf');
+    src: url('../../../public/fonts/Lato/Lato-Thin.ttf');
 }
 @font-face {
     font-family: 'lato-bold';
-    src: url('../public/fonts/Lato/Lato-Bold.ttf')
+    src: url('../../../public/fonts/Lato/Lato-Bold.ttf')
 }
 
 @font-face{
     font-family: 'robot';
-    src: url('../public/fonts/Roboto/Roboto-Thin.ttf');
+    src: url('../../../public/fonts/Roboto/Roboto-Thin.ttf');
 }
 
 * {

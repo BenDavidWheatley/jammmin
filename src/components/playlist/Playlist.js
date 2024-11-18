@@ -1,12 +1,12 @@
 import React from 'react';
 import Styles from './playlist.module.css';
-import TrackList from '../trackListComponent/Track-List';
-import Track from '../trackComponent/Track';
+import TrackList from '../trackList/Track-List';
+import Track from '../track/Track';
 
 function Playlist(props) {
-    const test =
-      props.addedTracks && props.addedTracks.childNodes
-        ? props.addedTracks.childNodes[0]
+    const addedToPlaylist =
+      props.playlistTracks && props.playlistTracks.childNodes
+        ? props.playlistTracks.childNodes[0]
         : null;
   
     return (
@@ -16,14 +16,14 @@ function Playlist(props) {
           placeholder="Name Your Playlist"
         ></input>
         <section className={Styles.playList}>
-          <TrackList addedTracks={props.addedTracks} />
+        <TrackList tracks={props.tracks} />
         </section>
        
-        {test ? (
-             <Track img={test.src} buttonText='remove'/>  
+   {/*     {addedToPlaylist ? (
+             <Track img={addedToPlaylist.src} buttonText='remove'/>  
         ) : (
           <p>No tracks added yet</p>
-        )}
+        )} */}
         <button className={Styles.addPlaylistButton}>Playlist</button>
       </div>
     );
