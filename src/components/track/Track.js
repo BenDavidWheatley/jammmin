@@ -10,7 +10,7 @@ function Track(props) {
         } else {
             setAddRemoveFunc(() => () => props.removeTrack(props.track));
         }
-    }, [props.addTrack, props.removeTrack, props.track]); // Dependencies
+    }, [props.addTrack, props.removeTrack]); // Dependencies
 
     return (
         <div className={Styles.trackContainer}>
