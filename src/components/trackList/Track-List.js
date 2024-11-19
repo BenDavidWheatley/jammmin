@@ -14,6 +14,9 @@ const TrackList = (props) => {
                 key={track.trackId}  
                 track={track}
                 addTrack={props.addTrack}
+                removeTrack={props.removeTrack}
+                buttonValue={props.buttonValue}
+
             />
           );
         })}

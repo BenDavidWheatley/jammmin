@@ -53,7 +53,6 @@ function App () {
         track.album.toLowerCase().includes(input) ||
         track.name.toLowerCase().includes(input)
     );
-    console.log(results[0].trackId)
     setFilteredTracks(results); // This will then get passed to the <SearchResults /> component as a prop. 
   }
  
@@ -61,23 +60,23 @@ function App () {
   /********** ADD TRACK TO PLAYLIST  ***********/
 
   const [playlistTracks, setPlaylistTracks] = useState([]); //This array will be send to <Playlists to render />
-
+  const [removeFromPlaylist, setRemoveFromPlaylist] = useState(null)
   // addToPlayList is passed to the <SearchResults /> and used as an onClick event to add the song to an array that will update <Playlist />
-  const addTrack =
-    (track) => {
+  const addTrack = (track) => {
+      if(playlistTracks.some((playlistTracks) => playlistTracks.trackId === track.trackId)){
+        return;
+      }
+      setPlaylistTracks([...playlistTracks, track])
+  };
 
-      setPlaylistTracks(track)
-    {/*}
-   if (playlistTracks.some((savedTrack) => savedTrack.id === track.id)) {
-    return;
-   }else {
-    setPlaylistTracks((prevTracks) => [...prevTracks, track]);
-   } */}
-       
-   console.log(playlistTracks);
-     
-   
-    }; 
+  /********** Remove track from playlist *************/
+
+
+const removeTrack = (track) => {
+  setPlaylistTracks((prevTracks) =>
+    prevTracks.filter((currentTrack) => currentTrack.trackId !== track.trackId)
+  );
+}
 
   /********** Returned JSX **********/
   return (
@@ -92,11 +91,11 @@ function App () {
       <div className={Styles.outerContainer}>
 
         <section className={Styles.trackListContainers}>
-          <SearchResults tracks={filteredTracks} addTrack={addTrack}/>
+          <SearchResults tracks={filteredTracks} addTrack={addTrack} buttonValue='add' />
         </section>
 
         <section  className={Styles.trackListContainers}>
-      {/*}    <Playlist tracks={playlistTracks} />  */}
+          <Playlist tracks={playlistTracks} removeTrack={removeTrack} buttonValue='remove'/>  
         </section>
 
       </div>     
