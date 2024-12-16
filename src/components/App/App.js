@@ -3,9 +3,11 @@ import SearchBar from '../searchBar/SearchBar';
 import SearchResults from '../searchResult/SearchResults';
 import Playlist from '../playlist/Playlist';
 import Styles from './App.module.css';
+import Login from '../login/login';
 import Bowie from '../../testImages/DavidBowieScaryMonstersCover.jpg'
 import Strokes from '../../testImages/isThisIt.png'
 import Temple from '../../testImages/temple.jpeg'
+import Spotify from '../../util/spotify'
 
 function App () {
 
@@ -35,10 +37,12 @@ function App () {
 
 
 /********* FILTER THROUGH SEARCH RESULTS **********/
+
 /**** COMPLETE *******/
 
   // this will contain all the artists based on the search and passed to <SearchResults />
   const [filteredTracks, setFilteredTracks] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const userSearch = (event) => {
 
@@ -60,6 +64,7 @@ function App () {
   /********** ADD TRACK TO PLAYLIST  ***********/
 
   const [playlistTracks, setPlaylistTracks] = useState([]); //This array will be send to <Playlists to render />
+
   const [removeFromPlaylist, setRemoveFromPlaylist] = useState(null)
   // addToPlayList is passed to the <SearchResults /> and used as an onClick event to add the song to an array that will update <Playlist />
   const addTrack = (track) => {
@@ -69,7 +74,7 @@ function App () {
       setPlaylistTracks([...playlistTracks, track])
   };
 
-  /********** Remove track from playlist *************/
+  /********** REMOVE TRACK FROM PLAYLIST *************/
 
 
 const removeTrack = (track) => {
@@ -78,29 +83,41 @@ const removeTrack = (track) => {
   );
 }
 
+const userLogin = () => {
+  setLoggedIn = !loggedIn;
+}
+
+
+
   /********** Returned JSX **********/
-  return (
-    <div>
-      <div className={Styles.headingAndSearch}>
-     
-        <h1>Ja<span className={Styles.mmm}>mmm</span>in</h1>
-        <p>Explore. Play. Repeat</p>
-        <SearchBar userSearch={() => userSearch} />
-      </div>
+    return (
+      <div>
+        <div className={Styles.headingAndSearch}>
       
-      <div className={Styles.outerContainer}>
+          <h1>Ja<span className={Styles.mmm}>mmm</span>in</h1>
+          <p>Explore. Play. Repeat</p>
+        { loggedIn ? ( <SearchBar userSearch={() => userSearch} /> ) : <p></p>}
+          
+        </div>
+        { loggedIn ? (
+       
 
-        <section className={Styles.trackListContainers}>
-          <SearchResults tracks={filteredTracks} addTrack={addTrack} buttonValue='add' />
-        </section>
+            <div className={Styles.outerContainer}>
 
-        <section  className={Styles.trackListContainers}>
-          <Playlist tracks={playlistTracks} removeTrack={removeTrack} buttonValue='remove'/>  
-        </section>
-
-      </div>     
-    </div>
-  );
+            <section className={Styles.trackListContainers}>
+              <SearchResults tracks={filteredTracks} addTrack={addTrack} buttonValue='add' />
+            </section>
+  
+            <section  className={Styles.trackListContainers}>
+              <Playlist tracks={playlistTracks} removeTrack={removeTrack} buttonValue='remove'/>  
+            </section>
+  
+          </div>  
+         ) : <Login emptyField={Spotify.emptyFormField} handleLogin={Spotify.handleLogin} />
+        }
+           
+      </div>
+    );
 }
 
 export default App;

@@ -12,6 +12,7 @@ function Track(props) {
         }
     }, [props.addTrack, props.removeTrack]); // Dependencies
 
+    
     return (
         <div className={Styles.trackContainer}>
             <img className={Styles.albumCover} src={props.track.img} alt="Album Cover" />
