@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import SearchBar from '../searchBar/SearchBar';
 import SearchResults from '../searchResult/SearchResults';
 import Playlist from '../playlist/Playlist';
@@ -12,28 +12,49 @@ import Spotify from '../../util/spotify'
 function App () {
 
   //The below tracks variable is an array for testing purposes
-  const tracks = [{
-          name: 'Ashes to Ashes',
-          artist: 'David Bowie',
-          album: 'Scary Monsters (and Super Creeps)',
-          img: Bowie,
-          trackId: '1'
-      },
-      {
-          name: 'Temple',
-          artist: 'Mathew and the Atlas',
-          album: 'Temple',
-          img:  Temple,
-          trackId: 2
-      },
-      {
-          name: 'Last night',
-          artist: 'The Strokes',
-          album: 'is this is',
-          img: Strokes,
-          trackId: 3
-      }
-  ]
+  const [tracks, setTracks] = useState([]);
+
+
+const redirectUri = 'http://localhost:3000/';
+const AUTHORIZE = "https://accounts.spotify.com/authorize";
+
+const [clientId, setClientId] = useState();
+const [loggedIn, setLoggedIn] = useState(false);
+
+/* handleLogin will set clientId with the client ID that spotify provides */
+
+const handleLogin = () => {
+    let getId = document.getElementById('clientId');       
+    if(getId.value) { 
+      setClientId(getId.value); // This is the client ID provided by spotify
+      getId.classList.remove('error'); 
+    } else {
+      setClientId(false);
+      getId.classList.add('error'); 
+    }
+  }
+
+/* The below useEffect will run when clientId is updated and will redirect the user to the spotify permissions screen */
+
+useEffect(() => {
+    if(clientId){
+      let url = AUTHORIZE;
+      url += "?client_id=" + clientId;
+      url += "&response_type=token"; //Note that the solution code used token
+      url += "&redirect_uri=" + encodeURI(redirectUri);
+      url += "&show_dialog=true";
+      url += "&scope=playlist-modify-public";
+      window.location.href = url;  
+    }
+    /* Checks if the url has an access token and sets loggedIn. LoggedIn determines if the login displays or the search */
+    const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
+
+    if(accessTokenMatch){
+      setLoggedIn(true);
+    }else{
+      setLoggedIn(false);
+    }
+  }, [clientId]);
 
 
 /********* FILTER THROUGH SEARCH RESULTS **********/
@@ -41,10 +62,19 @@ function App () {
 /**** COMPLETE *******/
 
   // this will contain all the artists based on the search and passed to <SearchResults />
-  const [filteredTracks, setFilteredTracks] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
+const [filteredTracks, setFilteredTracks] = useState(null);
 
-  const userSearch = (event) => {
+const userSearch = (event) => {
+    const input = event.target.value.toLowerCase();
+    
+    if(input){
+      Spotify.search(input).then(setTracks);
+      console.log(tracks)
+    }
+  };
+
+  
+  /*const userSearch = (event) => {
 
     const input = event.target.value.toLowerCase(); // Convert input to lowercase. This is the value of the search bar
     //If the search bar is empty then filteredTracks is null which will be passed to <SearchResults /> and will not display any albums
@@ -60,7 +90,9 @@ function App () {
     setFilteredTracks(results); // This will then get passed to the <SearchResults /> component as a prop. 
   }
  
-  };
+  };*/
+
+
   /********** ADD TRACK TO PLAYLIST  ***********/
 
   const [playlistTracks, setPlaylistTracks] = useState([]); //This array will be send to <Playlists to render />
@@ -105,15 +137,23 @@ const userLogin = () => {
             <div className={Styles.outerContainer}>
 
             <section className={Styles.trackListContainers}>
-              <SearchResults tracks={filteredTracks} addTrack={addTrack} buttonValue='add' />
+              <SearchResults 
+                tracks={tracks} 
+                addTrack={addTrack} 
+                buttonValue='add' />
             </section>
   
             <section  className={Styles.trackListContainers}>
-              <Playlist tracks={playlistTracks} removeTrack={removeTrack} buttonValue='remove'/>  
+              <Playlist 
+                tracks={playlistTracks} 
+                removeTrack={removeTrack} 
+                buttonValue='remove'/>  
             </section>
   
           </div>  
-         ) : <Login emptyField={Spotify.emptyFormField} handleLogin={Spotify.handleLogin} />
+         ) : <Login 
+               // emptyField={Spotify.emptyFormField} 
+                handleLogin={handleLogin} />
         }
            
       </div>

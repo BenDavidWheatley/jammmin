@@ -8,3 +8,12 @@
   background-image: url(./Images/finalBackground.png);
   background-size: cover;
 }
+
+.error {
+  border: 2px solid red;
+}
+.noError {
+  border: 1px solid black;
+}
+
+

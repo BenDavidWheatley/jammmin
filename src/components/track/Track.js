@@ -15,7 +15,7 @@ function Track(props) {
     
     return (
         <div className={Styles.trackContainer}>
-            <img className={Styles.albumCover} src={props.track.img} alt="Album Cover" />
+            <img className={Styles.albumCover} src={props.track.image} alt="Album Cover" />
 
             <section className={Styles.info}>
                 <p className={Styles.song}>Song: {props.track.name}</p>
