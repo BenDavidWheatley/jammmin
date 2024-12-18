@@ -4,10 +4,10 @@ import Styles from './login.module.css';
 
 function Login (props) {
     return (
-        <div>
-            <label>Input your client ID</label>
+        <div className={Styles.loginContainer}>
+            <label className={Styles.loginHeader}>Input your client ID</label>
             <input  id='clientId' type='text' required></input>
-            <input type='submit' onClick={props.handleLogin}></input>
+            <input className={Styles.submitButton} type='submit' onClick={props.handleLogin}></input>
         </div>
     );
 }

@@ -4,7 +4,7 @@ import Styles from './SearchBar.module.css'
 function SearchBar (props) {
     return (
         <div className={Styles.searchContainer}>
-            <input className={Styles.search}type='text' onChange={props.userSearch()}></input>
+            <input className={Styles.search}type='text' onChange={props.userSearch()} placeholder='Search'></input>
         </div>
     )
 }

@@ -12,17 +12,23 @@ function Track(props) {
         }
     }, [props.addTrack, props.removeTrack]); // Dependencies
 
-    
     return (
         <div className={Styles.trackContainer}>
             <img className={Styles.albumCover} src={props.track.image} alt="Album Cover" />
 
             <section className={Styles.info}>
-                <p className={Styles.song}>Song: {props.track.name}</p>
-                <p className={Styles.artist}>Artist: {props.track.artist}</p>
-                <p className={Styles.album}>Album: {props.track.album}</p>
-            </section>
-            
+                <div>
+                    <p className={Styles.trackHeadings}>Song: </p>
+                    <p className={Styles.trackHeadings}>Artist: </p>
+                    <p className={Styles.trackHeadings}>Album: </p>
+
+                </div>
+                <div>
+                    <p className={Styles.trackInfo}>{props.track.name}</p>
+                    <p className={Styles.trackInfo}>{props.track.artist}</p>
+                    <p className={Styles.trackInfo}>{props.track.album}</p>
+                </div>
+             </section> 
             <button
                 className={Styles.addButton}
                 onClick={addRemoveFunc} // Use the function stored in state

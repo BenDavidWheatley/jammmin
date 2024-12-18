@@ -1,3 +1,31 @@
 
 /********** User Experience **********/
 
+.loginContainer{
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 300px
+}
+.loginContainer label{
+    text-align: center;
+}
+.loginHeader{
+    font-size: 21px;
+}
+.loginContainer input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+}
+.submitButton {
+    border-radius: 10px;
+    color: white;
+    background-color: #3A2F3D;
+}
+.submitButton:hover{
+    color: #3a2f3d;
+    background-color: white;
+    transition: all 0.5s;
+}
