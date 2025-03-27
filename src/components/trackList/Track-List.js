@@ -1,5 +1,4 @@
 import React from 'react';
-import Styles from './trackList.module.css';
 import Track from '../track/Track';
 
 const TrackList = (props) => {

@@ -1,10 +1,10 @@
 .playlistContainer {
     display: flex;
     flex-direction: column;
- /*   background-color: #0005;*/
     padding: 20px;
     border-radius: 5px;
     height: auto;
+
 }
 .playlistTitle {
     color: black;
